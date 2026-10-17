@@ -67,12 +67,22 @@ The Gateway communicates with backend services through their Docker DNS names.
 
 **Gateway returns HTTP 500:** Check backend service availability and container logs.
 
+## Testing Results
+
+All four Docker images built successfully using Docker Compose.
+
+All seven GET endpoints returned HTTP 200 during local testing.
+
+The Gateway successfully communicated with the User, Product,
+and Order services over the shared Docker network.
+
 ## Screenshots
 
-Add real screenshots showing:
+### Running Containers
+![Running Containers](screenshots/01-containers-running.png)
 
-1. All four containers running in Docker Desktop.
-2. Output of `docker compose ps`.
-3. Successful API responses.
+### API Testing
+![API Testing](screenshots/02-api-testing.png)
 
-**Testing status:** Docker Engine is currently unavailable. Runtime testing and screenshots are pending.
+### Docker Desktop
+![Docker Desktop](screenshots/03-docker-desktop.png)
