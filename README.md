@@ -1,68 +1,78 @@
-# Microservices-Task
+# Dockerized Node.js Microservices
 
 ## Overview
-This document provides details on testing various services after running the `docker-compose` file. These services include User, Product, Order, and Gateway Services. Each service has its own endpoints for testing purposes.
+This project uses Docker and Docker Compose to containerize four Node.js microservices.
 
----
+## Services
 
-## Services and Endpoints
+| Service | Port | Endpoint |
+|---|---|---|
+| User Service | 3000 | `/users` |
+| Product Service | 3001 | `/products` |
+| Order Service | 3002 | `/orders` |
+| Gateway Service | 3003 | `/health` |
 
-### **User Service**
-- **Base URL:** `http://localhost:3000`
-- **Endpoints:**
-  - **List Users:**  
-    ```
-    curl http://localhost:3000/users
-    ```
-    Or open in your browser: [http://localhost:3000/users](http://localhost:3000/users)
+The Gateway exposes `/api/users`, `/api/products`, and `/api/orders`.
 
----
+## Prerequisites
+- Docker Desktop
+- Docker Compose
+- Git
 
-### **Product Service**
-- **Base URL:** `http://localhost:3001`
-- **Endpoints:**
-  - **List Products:**  
-    ```
-    curl http://localhost:3001/products
-    ```
-    Or open in your browser: [http://localhost:3001/products](http://localhost:3001/products)
+## Setup Instructions
 
----
+Clone the repository and navigate to the project directory.
 
-### **Order Service**
-- **Base URL:** `http://localhost:3002`
-- **Endpoints:**
-  - **List Orders:**  
-    ```
-    curl http://localhost:3002/orders
-    ```
-    Or open in your browser: [http://localhost:3002/orders](http://localhost:3002/orders)
+Build and start all containers:
 
----
+`docker compose up --build -d`
 
-### **Gateway Service**
-- **Base URL:** `http://localhost:3003/api`
-- **Endpoints:**
-  - **Users:**  
-    ```
-    curl http://localhost:3003/api/users
-    ```
-  - **Products:**  
-    ```
-    curl http://localhost:3003/api/products
-    ```
-  - **Orders:**  
-    ```
-    curl http://localhost:3003/api/orders
-    ```
+Check container status:
 
----
+`docker compose ps`
 
-## Instructions
-1. Start all services using the `docker-compose` file:
-   ```
-   docker-compose up
-   ```
-2. Once the services are running, use the above endpoints to verify the functionality.
+View logs:
 
-Happy testing!
+`docker compose logs`
+
+Stop containers:
+
+`docker compose down`
+
+## Testing
+
+After the containers start, test the following URLs:
+
+- http://localhost:3000/users
+- http://localhost:3001/products
+- http://localhost:3002/orders
+- http://localhost:3003/health
+- http://localhost:3003/api/users
+- http://localhost:3003/api/products
+- http://localhost:3003/api/orders
+
+## Networking
+
+All services use the shared `microservices-network` Docker bridge network.
+
+The Gateway communicates with backend services through their Docker DNS names.
+
+## Troubleshooting
+
+**Docker Engine unavailable:** Restart Docker Desktop and verify WSL2.
+
+**Port already allocated:** Check whether ports 3000–3003 are in use.
+
+**Container fails to start:** Run `docker compose logs <service-name>`.
+
+**Gateway returns HTTP 500:** Check backend service availability and container logs.
+
+## Screenshots
+
+Add real screenshots showing:
+
+1. All four containers running in Docker Desktop.
+2. Output of `docker compose ps`.
+3. Successful API responses.
+
+**Testing status:** Docker Engine is currently unavailable. Runtime testing and screenshots are pending.
